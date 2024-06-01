@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .task {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .task-actions {
+        display: flex;
+        gap: 10px;
+      }
+      .task-actions button {
+        padding: 5px 10px;
+        border-radius: 3px;
+      }
+      .task-actions .edit-btn {
+        background-color: #28a745;
+      }
+      .task-actions .edit-btn:hover {
+        background-color: #218838;
+      }
+      .task-actions .delete-btn {
+        background-color: #dc3545;
+      }
+      .task-actions .delete-btn:hover {
+        background-color: #c82333;
+      }
+      .container{
+        width: 80vw;
+        margin: 0 auto;
+      }
+      .one-container{
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4vw;
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+    <div class="one-container">
+        <h1>ToDo List App</h1>
+    </div>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+    {% for todo in tasks %}
+      <div class="task">
+        <p>{{ todo.task }}</p>
+        <div class="task-actions">
+          <a href="{% url 'edititems' todo.id %}">
+            <button type="button" class="edit-btn">Edit</button>
+          </a>
+          <a href="{% url 'deleteitems' todo.id %}">
+            <button type="button" class="delete-btn">Delete</button>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+  </body>
+</html>
